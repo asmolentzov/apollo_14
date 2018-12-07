@@ -20,9 +20,9 @@ describe 'As a visitor to the app' do
     
     expect(page).to have_content(astronaut.name)
     expect(page).to have_content(astronaut_2.name)
-    expect(page).to have_content(astronaut.job)
-    expect(page).to have_content(astronaut_2.job)
-    expect(page).to have_content(astronaut.age)
-    expect(page).to have_content(astronaut_2.age)
+    expect(page).to have_content("Job: #{astronaut.job}")
+    expect(page).to have_content("Job: #{astronaut_2.job}")
+    expect(page).to have_content("Age: #{astronaut.age}")
+    expect(page).to have_content("Age: #{astronaut_2.age}")
   end
 end
