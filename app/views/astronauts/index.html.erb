@@ -4,13 +4,13 @@
 
 <% @astronauts.each do |astronaut| %>
   <div id="astronaut-<%= astronaut.id %>">
-    <%= astronaut.name %>
-    Age: <%= astronaut.age %>
-    Job: <%= astronaut.job %>
+    <p><%= astronaut.name %></p>
+    <p>Age: <%= astronaut.age %></p>
+    <p>Job: <%= astronaut.job %></p>
     Missions: 
     <% astronaut.sorted_missions.each do |mission| %>
       <p><%= mission.title %></p>
     <% end %>
-    Total Time in Space: <%= astronaut.total_time_in_space %>
+    Total Time in Space: <%= astronaut.total_time_in_space %> days
   </div>
 <% end %>
