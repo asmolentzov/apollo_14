@@ -3,4 +3,12 @@ class Astronaut < ApplicationRecord
   
   has_many :astronaut_missions
   has_many :missions, through: :astronaut_missions
+  
+  def self.average_age
+    average(:age)
+  end
+  
+  def sorted_missions
+    self.missions.order(title: :asc)
+  end
 end

@@ -20,7 +20,22 @@ describe Astronaut, type: :model do
         Astronaut.create(name: "Astronaut", age: 40, job: "Commander")
         average_age = 38.67
         
-        expect(Astronaut.average_age).to eq(average_age)
+        expect(Astronaut.average_age.round(2)).to eq(average_age)
+      end
+    end
+  end
+  
+  describe 'Instance Methods' do
+    describe '#sorted_missions' do
+      it 'should return a sorted list of missions' do
+        astronaut = Astronaut.create(name: "Neil Armstrong", age: 37, job: "Commander")
+        mission_1 = astronaut.missions.create(title: "Gemini 7", time_in_space: 20)
+        mission_2 = astronaut.missions.create(title: "Capricorn 4", time_in_space: 20)
+        mission_3 = astronaut.missions.create(title: "Apollo 13", time_in_space: 20)
+        
+        sorted = [mission_3, mission_2, mission_1]
+        
+        expect(astronaut.sorted_missions).to eq(sorted)
       end
     end
   end
