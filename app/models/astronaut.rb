@@ -9,6 +9,10 @@ class Astronaut < ApplicationRecord
   end
   
   def sorted_missions
-    self.missions.order(title: :asc)
+    missions.order(title: :asc)
+  end
+  
+  def total_time_in_space
+    missions.sum(:time_in_space)
   end
 end

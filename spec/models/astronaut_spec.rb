@@ -38,5 +38,17 @@ describe Astronaut, type: :model do
         expect(astronaut.sorted_missions).to eq(sorted)
       end
     end
+    describe '#total_time_in_space' do
+      it 'should display the total time spent in space' do
+        astronaut = Astronaut.create(name: "Neil Armstrong", age: 37, job: "Commander")
+        mission_1 = astronaut.missions.create(title: "Gemini 7", time_in_space: 20)
+        mission_2 = astronaut.missions.create(title: "Capricorn 4", time_in_space: 10)
+        mission_3 = astronaut.missions.create(title: "Apollo 13", time_in_space: 15)
+        
+        total_time = 45
+        
+        expect(astronaut.total_time_in_space).to eq(total_time)
+      end
+    end
   end
 end

@@ -1,12 +1,11 @@
 require 'rails_helper'
 
+# User Story 4 of 4
+# 
 # As a visitor,
 # When I visit '/astronauts'
-# I see a list of the space missions' in alphabetical order for each astronaut.
-# 
-# (e.g "Apollo 13"
-#      "Capricorn 4"
-#      "Gemini 7")
+# I see the total time in space for each astronaut.
+# (e.g. "Name: Neil Armstrong, Age: 37, Job: Commander, Total Time in Space: 760 days")
 
 describe 'As a visitor to the app' do
   it 'I see a list of astronauts' do
@@ -47,6 +46,25 @@ describe 'As a visitor to the app' do
     end
     within "#astronaut-#{astronaut_2.id}" do
       expect(page).to have_content("Apollo 13\nGemini 7")
+    end
+  end
+  
+  it "should show total time in space for each astronaut" do
+    astronaut = Astronaut.create(name: "Neil Armstrong", age: 37, job: "Commander")
+    astronaut_2 = Astronaut.create(name: "Buzz Aldrin", age: 39, job: "Commander")
+    mission_1 = astronaut.missions.create(title: "Gemini 7", time_in_space: 20)
+    mission_2 = astronaut.missions.create(title: "Capricorn 4", time_in_space: 30)
+    mission_3 = astronaut.missions.create(title: "Apollo 13", time_in_space: 10)
+    mission_4 = astronaut_2.missions.create(title: "Gemini 7", time_in_space: 10)
+    mission_5 = astronaut_2.missions.create(title: "Apollo 13", time_in_space: 20)
+    
+    visit astronauts_path
+    
+    within "#astronaut-#{astronaut.id}" do
+      expect(page).to have_content("Total Time in Space: #{astronaut.total_time_in_space}")
+    end
+    within "#astronaut-#{astronaut_2.id}" do
+      expect(page).to have_content("Total Time in Space: #{astronaut_2.total_time_in_space}")
     end
   end
   
